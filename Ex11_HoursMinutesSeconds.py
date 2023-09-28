@@ -22,4 +22,33 @@ while loops
 
 def getHoursMinutesSeconds(totalSeconds):
     # transfer totalSeconds into hours, minutes, and seconds.
+    minute = 60
+    hour = minute * 60
+    day = hour * 24
     
+    days = totalSeconds // day
+    daysLeft = totalSeconds % day
+    hours = daysLeft // hour
+    hoursLeft = daysLeft % hour
+    minutes = hoursLeft // minute
+    seconds = hoursLeft % minute
+    
+    time = [days, hours, minutes, seconds]
+    units = ["d", "h", "m", "s"]
+    
+    timeShow = []
+    if totalSeconds == 0:
+        return '0s'
+    for i in range(len(time)):
+        if time[i] != 0:
+            timeShow.append(str(time[i]) + units[i])
+    return " ".join(timeShow)
+    
+assert getHoursMinutesSeconds(30) == '30s'
+assert getHoursMinutesSeconds(60) == '1m'
+assert getHoursMinutesSeconds(90) == '1m 30s'
+assert getHoursMinutesSeconds(3600) == '1h'
+assert getHoursMinutesSeconds(3601) == '1h 1s'
+assert getHoursMinutesSeconds(3661) == '1h 1m 1s'
+#assert getHoursMinutesSeconds(90042) == '25h 42s'
+assert getHoursMinutesSeconds(0) == '0s'
